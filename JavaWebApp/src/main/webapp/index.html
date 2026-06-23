@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Web Application</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+        
+        .features {
+            margin-bottom: 40px;
+        }
+        
+        .feature {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+        
+        .feature h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+        
+        .feature p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        a {
+            display: inline-block;
+            padding: 14px 24px;
+            text-decoration: none;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: #764ba2;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #63408a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+        }
+        
+        .info-box {
+            background-color: #e8f4f8;
+            border: 1px solid #b3e5fc;
+            border-radius: 6px;
+            padding: 20px;
+            margin-top: 30px;
+            color: #01579b;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .info-box strong {
+            color: #01579b;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #999;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☕ Java Web Application</h1>
+        <p class="subtitle">Dynamic Web Application with Servlets</p>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>✨ Hello Servlet</h3>
+                <p>A simple servlet that demonstrates basic request/response handling and HTML generation.</p>
+            </div>
+            
+            <div class="feature">
+                <h3>👤 User Registration</h3>
+                <p>Advanced servlet with form handling, session management, and data processing.</p>
+            </div>
+            
+            <div class="feature">
+                <h3>⚙️ Web Configuration</h3>
+                <p>Uses web.xml deployment descriptor for servlet mapping and configuration.</p>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <a href="MyjavaWebapp\JavaWebApp\src\main\java\com\example\servlet\HelloServlet.java" class="btn-primary">→ Visit Hello Servlet</a>
+            <a href="MyjavaWebapp\JavaWebApp\src\main\java\com\example\servlet\UserServlet.java" class="btn-secondary">→ Go to User Registration</a>
+        </div>
+        
+        <div class="info-box">
+            <strong>📝 Project Information:</strong><br><br>
+            This is a Maven-based Java web application that demonstrates servlet development.<br><br>
+            <strong>Project Structure:</strong><br>
+            • <code>src/main/java/</code> - Java servlet classes<br>
+            • <code>src/main/webapp/</code> - Web resources (HTML, CSS, etc.)<br>
+            • <code>pom.xml</code> - Maven configuration<br><br>
+            <strong>Deployment Descriptor:</strong><br>
+            • <code>WEB-INF/web.xml</code> - Servlet mapping and configuration
+        </div>
+        
+        <div class="footer">
+            <p>Java Web Application v1.0.0</p>
+        </div>
+    </div>
+</body>
+</html>
