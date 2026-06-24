@@ -38,7 +38,8 @@ You'll see:
 Open browser and visit:
 - **Home:** http://localhost:8080/
 - **Hello Servlet:** http://localhost:8080/hello
-- **User Form:** http://localhost:8080/user
+- **Registration Page:** http://localhost:8080/register
+- **Login Page:** http://localhost:8080/login
 
 ## Project Contents
 
@@ -48,17 +49,20 @@ Open browser and visit:
 JavaWebApp/
 ├── pom.xml                      ← Maven config (dependencies, build settings)
 ├── README.md                    ← Full documentation
-├── .gitignore                   ← Git ignore file
 └── src/
     └── main/
         ├── java/
         │   └── com/example/servlet/
         │       ├── HelloServlet.java     ← Simple servlet (GET request)
-        │       └── UserServlet.java      ← Advanced servlet (POST, sessions)
+        │       ├── LoginServlet.java     ← Login controller (MySQL auth)
+        │       └── UserServlet.java      ← Registration controller (MySQL insert)
         └── webapp/
             ├── WEB-INF/
             │   └── web.xml              ← Servlet mappings & config
-            ├── index.html               ← Homepage
+            ├── index.jsp                ← Homepage
+            ├── login.jsp                ← Login page
+            ├── register.jsp             ← Registration page
+            ├── result.jsp               ← Result page
             └── error.html               ← Error page
 ```
 
@@ -67,7 +71,7 @@ JavaWebApp/
 ### web.xml (Deployment Descriptor)
 Configures:
 - Servlet declarations
-- URL mappings (/hello, /user)
+- URL mappings (/hello, /register, /login)
 - Error pages (404, 500)
 - Session settings
 - Welcome files
@@ -79,10 +83,14 @@ Configures:
 - Example: `/hello?name=John`
 
 ### UserServlet.java
-- URL: `/user`
-- GET: Shows registration form
-- POST: Processes form, stores in session
-- Shows: Confirmation page with submitted data
+- URL: `/register`
+- GET: Shows registration JSP
+- POST: Saves new users to MySQL
+
+### LoginServlet.java
+- URL: `/login`
+- GET: Shows login JSP
+- POST: Validates credentials from MySQL
 
 ## Useful Commands
 
@@ -102,8 +110,8 @@ curl http://localhost:8080/
 curl http://localhost:8080/hello?name=Alice
 
 # POST request
-curl -X POST -d "firstName=John&lastName=Doe&email=john@example.com" \
-  http://localhost:8080/user
+curl -X POST -d "username=john&email=john@example.com&password=secret&confirmPassword=secret" \
+  http://localhost:8080/register
 ```
 
 ### Clean Up

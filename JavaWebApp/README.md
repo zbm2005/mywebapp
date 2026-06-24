@@ -6,6 +6,8 @@ A complete dynamic Java web application built with Apache Maven, featuring servl
 
 This project demonstrates:
 - ✅ Dynamic servlet development
+- ✅ JSP views for home, registration, login, and result pages
+- ✅ MySQL-backed user registration and login
 - ✅ Web deployment descriptor (web.xml)
 - ✅ Request/Response handling
 - ✅ Session management
@@ -26,7 +28,10 @@ JavaWebApp/
 │       └── webapp/
 │           ├── WEB-INF/
 │           │   └── web.xml                    # Deployment descriptor
-│           ├── index.html                     # Homepage
+│           ├── index.jsp                      # Homepage
+│           ├── register.jsp                   # Registration form
+│           ├── login.jsp                      # Login form
+│           ├── result.jsp                     # Success/error result page
 │           └── error.html                     # Error page
 ├── pom.xml                                    # Maven configuration
 └── README.md                                  # This file
@@ -140,13 +145,19 @@ Key configurations:
   - Init parameter usage from web.xml
 
 ### UserServlet
-- **URL:** `/user`
+- **URL:** `/register`
 - **Features:**
-  - GET (displays form)
+  - GET (displays JSP form)
   - POST (processes form data)
+  - MySQL persistence
+  - Registration validation
+
+### LoginServlet
+- **URL:** `/login`
+- **Features:**
+  - GET (displays JSP form)
+  - POST (authenticates against MySQL)
   - Session management
-  - HTML form with validation
-  - User data persistence in session
 
 ## 📖 Usage Examples
 
@@ -243,8 +254,8 @@ taskkill /PID <PID> /F
 ```
 
 ### 2. Add JSP Support
-- Create `.jsp` files in `src/main/webapp/`
-- Use `<jsp:useBean>` and `<jsp:setProperty>` tags
+- Use the existing `.jsp` files in `src/main/webapp/`
+- Keep servlet logic in `src/main/java/` and render results in JSP views
 
 ### 3. Implement Filters
 ```java

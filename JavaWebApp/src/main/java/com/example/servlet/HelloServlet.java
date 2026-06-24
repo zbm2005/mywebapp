@@ -71,9 +71,11 @@ public class HelloServlet extends HttpServlet {
             out.println("            <p>Request URI: " + request.getRequestURI() + "</p>");
             out.println("            <p>Server Name: " + request.getServerName() + "</p>");
             out.println("        </div>");
-            out.println("        <p><a href='/hello?name=John'>Try with name parameter: John</a></p>");
-            out.println("        <p><a href='/user'>Visit User Servlet</a></p>");
-            out.println("        <p><a href='/'>Back to Home</a></p>");
+            String contextPath = request.getContextPath();
+            out.println("        <p><a href='" + contextPath + "/hello?name=John'>Try with name parameter: John</a></p>");
+            out.println("        <p><a href='" + contextPath + "/register'>Visit Registration Page</a></p>");
+            out.println("        <p><a href='" + contextPath + "/login'>Visit Login Page</a></p>");
+            out.println("        <p><a href='" + contextPath + "/'>Back to Home</a></p>");
             out.println("    </div>");
             out.println("</body>");
             out.println("</html>");

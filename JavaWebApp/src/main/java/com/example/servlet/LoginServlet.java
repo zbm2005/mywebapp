@@ -7,16 +7,17 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class UserServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     private final UserDao userDao = new UserDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     @Override
@@ -25,27 +26,27 @@ public class UserServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String username = trim(request.getParameter("username"));
-        String email = trim(request.getParameter("email"));
         String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirmPassword");
 
-        if (username.isEmpty() || email.isEmpty() || isBlank(password) || isBlank(confirmPassword)) {
-            forwardResult(request, response, false, "All fields are required.", "");
-            return;
-        }
-
-        if (!password.equals(confirmPassword)) {
-            forwardResult(request, response, false, "Passwords do not match.", "");
+        if (username.isEmpty() || password == null || password.trim().isEmpty()) {
+            forwardResult(request, response, false, "Username and password are required.", "");
             return;
         }
 
         try {
-            User createdUser = userDao.createUser(username, email, password);
-            forwardResult(request, response, true, "Registration successful.", "Account created for " + createdUser.getUsername() + ".");
-        } catch (IllegalStateException ex) {
-            forwardResult(request, response, false, ex.getMessage(), "");
+            User user = userDao.authenticate(username, password);
+            if (user == null) {
+                forwardResult(request, response, false, "Invalid username or password.", "");
+                return;
+            }
+
+            HttpSession session = request.getSession(true);
+            session.setAttribute("loggedInUser", user.getUsername());
+            session.setAttribute("loggedInEmail", user.getEmail());
+
+            forwardResult(request, response, true, "Login successful.", "Welcome back, " + user.getUsername() + ".");
         } catch (Exception ex) {
-            throw new ServletException("Unable to register user", ex);
+            throw new ServletException("Unable to authenticate user", ex);
         }
     }
 
@@ -54,16 +55,12 @@ public class UserServlet extends HttpServlet {
         request.setAttribute("success", success);
         request.setAttribute("message", message);
         request.setAttribute("details", details);
-        request.setAttribute("backUrl", request.getContextPath() + "/register");
-        request.setAttribute("backText", "Back to registration");
+        request.setAttribute("backUrl", request.getContextPath() + "/login");
+        request.setAttribute("backText", "Back to login");
         request.getRequestDispatcher("/result.jsp").forward(request, response);
     }
 
     private String trim(String value) {
         return value == null ? "" : value.trim();
-    }
-
-    private boolean isBlank(String value) {
-        return value == null || value.trim().isEmpty();
     }
 }
