@@ -1,4 +1,4 @@
-# Java Web Application with Servlets
+# Java Web Application with Servlets (Nightly Version)
 
 A complete dynamic Java web application built with Apache Maven, featuring servlet-based request handling and web.xml configuration.
 
